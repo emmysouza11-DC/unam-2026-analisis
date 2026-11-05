@@ -72,7 +72,7 @@ Los datos provienen del repositorio comunitario: [agn3si/ResultadosUNAM---data](
 
 
 
-Emmanuel Ramírez Souza — \[LinkedIn](linkedin.com/in/emmanuel-souza-ab9259341) · Proyecto independiente, sin afiliación con la UNAM.
+Emmanuel Ramírez Souza — \[LinkedIn](https://www.linkedin.com/in/emmanuel-souza-ab9259341/) · Proyecto independiente, sin afiliación con la UNAM.
 
 
 
