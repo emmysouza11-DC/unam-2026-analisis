@@ -1,0 +1,9 @@
+﻿*.aux
+*.log
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.toc
+*aciertos_unam_2021_2026.csv
+*Files1.zip

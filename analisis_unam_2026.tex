@@ -1,0 +1,155 @@
+%=========================================================================
+%  ANÁLISIS DISTRIBUCIONAL DEL EXAMEN DE ADMISIÓN UNAM 2026
+%  Andamiaje / plantilla — el contenido lo redacta el autor.
+%  Compilar en Overleaf con pdfLaTeX.
+%=========================================================================
+\documentclass[11pt,a4paper]{article}
+
+% ---- Paquetes esenciales ----
+\usepackage[utf8]{inputenc}      % acentos y ñ directos en el fuente
+\usepackage[T1]{fontenc}         % codificación de salida correcta
+\usepackage[spanish]{babel}      % reglas tipográficas en español
+\usepackage{amsmath,amssymb}     % matemática: \sum, \log, ecuaciones
+\usepackage{graphicx}            % insertar figuras (tus PNG)
+\usepackage{booktabs}            % tablas profesionales (\toprule, \midrule)
+\usepackage{siunitx}             % alinear números por el punto decimal
+\usepackage[hidelinks]{hyperref} % enlaces y referencias clicables
+\usepackage{caption}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+% ---- Metadatos ----
+\title{\textbf{TÍTULO — tu pregunta central reformulada aquí}}
+\author{Emmanuel}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+%-------------------------------------------------------------------------
+\begin{abstract}
+% GUÍA (borra esto al redactar):
+% 4-6 oraciones. Un resumen NO es una introducción: aquí va TODO comprimido
+% —problema, qué hiciste, qué encontraste (los números clave), qué concluyes.
+% Se escribe AL FINAL, cuando ya sabes qué dice el resto. Déjalo vacío por ahora.
+\end{abstract}
+
+%-------------------------------------------------------------------------
+\section{Introducción}
+% GUÍA: aquí van TRES cosas, en este orden:
+%   1. El contexto del caso (examen en línea 2026, la polémica, qué pasó).
+%   2. Tu PREGUNTA CENTRAL, planteada como hipótesis rivales.
+%   3. Por qué importa / qué aporta este análisis (datos abiertos, reproducible).
+% NO metas resultados ni matemática todavía. Solo el "qué" y el "por qué".
+
+%-------------------------------------------------------------------------
+\section{Marco teórico y fundamentos matemáticos}
+% GUÍA: decidiste poner los fundamentos DENTRO del formato canónico, aquí,
+% antes de Métodos. Esta sección explica las HERRAMIENTAS, no los datos.
+
+\subsection{Divergencia de Kullback--Leibler}
+% GUÍA: define qué mide la KL conceptualmente (divergencia entre una
+% distribución P y una referencia Q). Presenta la fórmula. Explica la
+% ASIMETRÍA (por qué D(P||Q) != D(Q||P)) y qué dirección elegiste y por qué.
+% Menciona la unidad (nats, por el log natural).
+%
+% Ecuación lista para que la uses (ajusta la notación a tu gusto):
+\begin{equation}
+    D_{\mathrm{KL}}(P \,\|\, Q) = \sum_{i} P(i) \, \log \frac{P(i)}{Q(i)}
+    \label{eq:kl}
+\end{equation}
+
+\subsection{Prueba de Kolmogorov--Smirnov}
+% GUÍA: define el estadístico D como la máxima distancia vertical entre dos
+% CDF empíricas. Aclara qué hipótesis nula prueba. Explica —y esto es clave
+% que lo entiendas bien— por qué con n grande el p-valor pierde utilidad y
+% por qué reportas D como tamaño de efecto.
+\begin{equation}
+    D = \sup_{x} \, \lvert F_{1}(x) - F_{2}(x) \rvert
+    \label{eq:ks}
+\end{equation}
+
+%-------------------------------------------------------------------------
+\section{Datos y métodos}
+% GUÍA: aquí SÍ hablas de los datos concretos. Subsecciones sugeridas:
+
+\subsection{Fuente y descripción de los datos}
+% Origen (datos abiertos DGAE, repositorio comunitario), tamaño (1{,}027{,}716
+% folios), rango (2021-2026), las 4 áreas, escala 0-120 aciertos.
+% Sé honesto sobre que es scraping de terceros (limitación).
+
+\subsection{Limpieza y criterios de inclusión}
+% Tus decisiones EXPLÍCITAS: por qué eliminaste aciertos nulos (no presentaron)
+% y ceros; por qué NO filtraste por 'acreditado' (su nulo = "no aplica", no
+% dato perdido — el punto que te salvó de sesgar la muestra). Da el n final.
+
+\subsection{Procedimiento de cálculo}
+% Cómo discretizaste (bins de 1 acierto), el suavizado épsilon anti-log(0),
+% baseline conjunto 2021-2025 como Q vs 2026 como P, y el análisis de
+% contraste año-a-año que da escala a la KL. Menciona librerías (scipy).
+
+%-------------------------------------------------------------------------
+\section{Resultados}
+% GUÍA: SOLO los hallazgos, sin interpretarlos aún (la interpretación va en
+% Discusión). Aquí van tus tablas y figuras con su lectura factual.
+
+\subsection{Estadística descriptiva y forma de la distribución}
+% Media/mediana por año, y el hallazgo de forma: skewness estable ~+0.8 que
+% colapsa a ~0 en 2026, kurtosis que cae a negativa. Aquí va tu figura de
+% las 6 distribuciones.
+
+% Ejemplo de inserción de figura (descomenta y ajusta la ruta):
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=\textwidth]{dist_areas.png}
+%     \caption{Distribuciones de aciertos por área: 2026 vs histórico.}
+%     \label{fig:dist}
+% \end{figure}
+
+\subsection{Divergencia global y contraste histórico}
+% KL global 0.339 nats vs 0.002-0.004 año-a-año. KS D=0.293 vs 0.009-0.031.
+% Aquí conviene una tabla. Esqueleto listo:
+\begin{table}[ht]
+    \centering
+    \caption{Métricas de divergencia: 2026 vs.\ variación histórica.}
+    \begin{tabular}{lccc}
+        \toprule
+        Métrica & 2026 vs.\ histórico & Rango año-a-año & Factor \\
+        \midrule
+        KL (nats)      & 0.339 & 0.002--0.004 & $\sim$80--160$\times$ \\
+        KS ($D$)       & 0.293 & 0.009--0.031 & $\sim$10--30$\times$ \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:global}
+\end{table}
+
+\subsection{Análisis por área}
+% Tu tabla de las 4 áreas (KL, KS D, salto de mediana, %>=100). El hallazgo
+% de que ambas métricas rankean igual y que el efecto escala con la
+% competitividad de las carreras.
+
+%-------------------------------------------------------------------------
+\section{Discusión}
+% GUÍA: AQUÍ interpretas. Retoma tu pregunta central de la Introducción y
+% respóndela con la evidencia. El punto fino que discutimos: la KL mide
+% MAGNITUD, no causa; lo que inclina la balanza entre "mejora generacional"
+% y "efecto externo" es la FORMA del cambio (segunda población en la cola
+% alta, no desplazamiento uniforme). Sé explícito sobre qué puede y qué NO
+% puede concluir tu método.
+
+\subsection{Limitaciones}
+% Datos de terceros vía scraping; KL/KS no identifican mecanismo ni culpables;
+% examen de control presencial no incluido; análisis a nivel área (no
+% carrera-plantel); área de Humanidades con n menor.
+
+%-------------------------------------------------------------------------
+\section{Conclusión}
+% GUÍA: 1-2 párrafos. Cierra respondiendo la pregunta con la fuerza que la
+% evidencia permite —ni más ni menos. Sin números nuevos que no hayan
+% aparecido antes. Qué queda establecido y qué queda como pregunta abierta.
+
+%-------------------------------------------------------------------------
+% \section*{Reproducibilidad}
+% Opcional: enlace al notebook / repositorio.
+
+\end{document}
