@@ -64,7 +64,7 @@ Dependencias: `pandas`, `numpy`, `scipy`, `matplotlib`, `seaborn`.
 
 
 
-Los datos provienen del repositorio comunitario: agn3si/ResultadosUNAM---data (https://github.com/agn3si/ResultadosUNAM---data), obtenidos por web-scraping de las páginas públicas de resultados de la DGAE-UNAM. Este proyecto no rehospeda los datos; enlaza a la fuente original.
+Los datos provienen del repositorio comunitario: [agn3si/ResultadosUNAM---data](https://github.com/agn3si/ResultadosUNAM---data), obtenidos por web-scraping de las páginas públicas de resultados de la DGAE-UNAM. Este proyecto no rehospeda los datos; enlaza a la fuente original.
 
 
 
